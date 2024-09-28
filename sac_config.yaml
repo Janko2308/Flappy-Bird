@@ -1,0 +1,25 @@
+behaviors:
+  PlayGame:  # This should match the Behavior Name in Unity's Behavior Parameters
+    trainer_type: sac
+    hyperparameters:
+      batch_size: 256
+      buffer_size: 500000
+      learning_rate: 0.0003
+      init_entcoef: 0.05  # Initial entropy coefficient to encourage exploration
+      reward_signal_steps_per_update: 1500
+      steps_per_update: 1.0  # Adjust as needed
+      tau: 0.005  # Target smoothing coefficient
+    network_settings:
+      normalize: true
+      hidden_units: 128
+      num_layers: 2
+    reward_signals:
+      extrinsic:
+        gamma: 0.99
+        strength: 1.0
+    max_steps: 500000  # Adjust based on your training needs
+    time_horizon: 64
+    summary_freq: 10000
+    keep_checkpoints: 5
+    checkpoint_interval: 50000
+    threaded: true

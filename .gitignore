@@ -1,0 +1,88 @@
+# =============== #
+# Unity generated #
+# =============== #
+
+# Ignore the asset database
+/[Aa]ssets/AssetStoreTools*
+
+# Ignore the main Library folder
+/[Ll]ibrary/
+
+# Ignore temporary build files
+/[Tt]emp/
+
+# Ignore compiled project files
+/[Oo]bj/
+/[Bb]uild/
+
+# Ignore auto-generated VS/JetBrains project files
+/[Uu]nityGenerated/
+/[Uu]nity[Ww]orkspace/
+/[Vv]s/
+/[.vscode]/
+/.idea/
+/[Oo]bj/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+
+# Ignore build logs
+/[Ll]ogs/
+
+# Ignore Unity Player build
+/[Bb]uilds/
+
+# Ignore auto-generated meta files
+*.pidb.meta
+
+# ===================== #
+# Unity ML-Agents Files #
+# ===================== #
+# Ignore ML-Agents configuration and generated files
+/results/
+/models/
+
+# Ignore Python environment files
+/venv/
+/.env/
+/__pycache__/
+/*.pyc
+*.pyo
+*.pyd
+
+# ========================= #
+# User-specific Unity files #
+# ========================= #
+# Ignore user-specific project settings and preferences
+/[Uu]ser[Ss]ettings/
+
+# Ignore user-specific IDE settings
+/.idea/
+/.vscode/
+/.Rider/
+/[Rr]ider/
+
+# ==================== #
+# Operating System Files #
+# ==================== #
+# Windows
+[Dd]esktop.ini
+[Tt]humbs.db
+$RECYCLE.BIN/
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
