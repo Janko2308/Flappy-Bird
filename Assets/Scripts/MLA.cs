@@ -20,29 +20,25 @@ public class MLA : Agent
     Agent m_Agent;
     RayPerceptionSensor rayPerceptionSensor;
 
-    RaycastHit hit; // 3D RaycastHit
 
     void Start()
     {
         gameHandler = FindObjectOfType<GameHandler>();
-        birdRigidbody = GetComponent<Rigidbody>();  // 3D Rigidbody
+        birdRigidbody = GetComponent<Rigidbody>(); 
         m_Agent = GetComponent<Agent>();
         rayPerceptionSensor = GetComponent<RayPerceptionSensor>();
     }
 
     public override void Initialize()
     {
-        // Assuming your child GameObject is named "RaySensorHolder"
-        Transform raySensorHolder = transform.Find("RaySensorHolder");  // Find the child object
+        Transform raySensorHolder = transform.Find("RaySensorHolder");  
         RayPerceptionSensorComponent3D rayPerception = raySensorHolder.GetComponent<RayPerceptionSensorComponent3D>();
     }
 
     void Update()
     {
-        // Gravity should act continuously to pull the bird down
         direction.y += gravity * Time.deltaTime;
 
-        // Apply movement based on gravity and any previous flaps
         transform.position += direction * Time.deltaTime;
 
         Transform raySensorHolder = transform.Find("RaySensorHolder");
@@ -50,30 +46,11 @@ public class MLA : Agent
 
         if (rayPerception != null)
         {
-            // Assuming the ray length and direction are set correctly in the editor
-            Vector3 rayDirection = rayPerception.transform.forward;  // Direction of the ray
+            //Debug
+            Vector3 rayDirection = rayPerception.transform.forward;  
             Debug.DrawRay(rayPerception.transform.position, rayDirection * rayPerception.RayLength, Color.green);
         }
 
-        // // 3D Raycast
-        // if (Physics.Raycast(transform.position, Vector3.forward, out hit, 10f))  // Changed to Physics.Raycast for 3D
-        // {
-        //     // Visualize the ray in the Scene view
-        //     Debug.DrawRay(transform.position, Vector3.forward * 10f, Color.green);  // Adjust for 3D visualization
-
-        //     // Check if the bird hit a pipe or the ground
-        //     if (hit.collider != null)
-        //     {
-        //         if (hit.collider.CompareTag("Pipe"))
-        //         {
-        //             Debug.Log("Pipe detected");
-        //         }
-        //         else if (hit.collider.CompareTag("Ground"))
-        //         {
-        //             Debug.Log("Ground detected");
-        //         }
-        //     }
-        // }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -100,21 +77,18 @@ public class MLA : Agent
     {
         Debug.Log("OnEpisodeBegin");
 
-        // Reset the bird's Rigidbody velocities
-        birdRigidbody.velocity = Vector3.zero;        // Reset linear velocity
-        birdRigidbody.angularVelocity = Vector3.zero; // Reset angular velocity (no spinning)
-        direction = Vector3.zero;                     // Reset vertical movement
+        birdRigidbody.velocity = Vector3.zero;        
+        birdRigidbody.angularVelocity = Vector3.zero; 
+        direction = Vector3.zero;      
 
-        // Reset the bird's position above the ground (e.g., y = 1)
         transform.position = new Vector3(0, 0, 0);
-        transform.rotation = Quaternion.identity;      // Reset rotation to no tilt
+        transform.rotation = Quaternion.identity;      
 
-        // Reset the game environment (e.g., pipes and score)
         gameHandler.ResetGame();
     }
 
     public override void CollectObservations(VectorSensor sensor)
-{
+    {
     // Observe bird's y-position and velocity
     sensor.AddObservation(transform.position.y);
     sensor.AddObservation(birdRigidbody.velocity.y);
@@ -123,12 +97,10 @@ public class MLA : Agent
     Transform raySensorHolder = transform.Find("RaySensorHolder");
     RayPerceptionSensorComponent3D rayPerception = raySensorHolder.GetComponent<RayPerceptionSensorComponent3D>();
     
-    // If Ray Perception Sensor is attached and valid, collect raycast observations
     if (rayPerception != null)
     {
         Debug.Log("Ray Perception Sensor is valid");
         
-
     }   
 }
 
@@ -136,10 +108,8 @@ public class MLA : Agent
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        // Get the discrete actions output
         var discreteActions = actionsOut.DiscreteActions;
 
-        // Set the action based on player input (spacebar to flap)
         if (Input.GetKey(KeyCode.Space))
         {
             discreteActions[0] = 1;  // Action 1 (flap)
@@ -156,17 +126,15 @@ public class MLA : Agent
         int action = actions.DiscreteActions[0];
         Debug.Log("Action: " + action);
 
-        // Apply gravity continuously
         direction.y += gravity * Time.deltaTime;
 
         // If action == 1, apply a flap force upwards
         if (action == 1)
         {
-            //birdRigidbody.AddForce(Vector2.up * strength, ForceMode2D.Impulse);
             direction = Vector3.up * strength;
             Debug.Log("Flap");
 
-            // Small penalty for flapping to prevent unnecessary flaps
+            //Small penalty to prevent excessive flapping
             AddReward(-0.01f);
         }
 

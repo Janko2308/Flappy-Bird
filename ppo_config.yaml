@@ -1,5 +1,5 @@
 behaviors:
-  PlayGame:  # This should match the Behavior Name in Unity's Behavior Parameters
+  PlayGame:  
     trainer_type: ppo
     hyperparameters:
       batch_size: 1024
@@ -18,7 +18,7 @@ behaviors:
       extrinsic:
         gamma: 0.99
         strength: 1.0
-    max_steps: 500000  # Adjust based on your training needs
+    max_steps: 500000  
     time_horizon: 64
     summary_freq: 10000
     keep_checkpoints: 5

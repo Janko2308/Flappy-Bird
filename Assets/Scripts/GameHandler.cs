@@ -23,12 +23,6 @@ public class GameHandler : MonoBehaviour
         score.text = "0";
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void AddPoint()
     {
         points++;
