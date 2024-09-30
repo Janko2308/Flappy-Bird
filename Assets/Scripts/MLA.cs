@@ -9,14 +9,14 @@ using System;
 public class MLA : Agent
 {
     public GameHandler gameHandler;
-    public Rigidbody birdRigidbody; // Note: Changed from Rigidbody2D to Rigidbody for 3D
+    public Rigidbody birdRigidbody; 
     float m_TimeSinceDecision;
     public float timeBetweenDecisionsAtInference;
 
-    public float gravity = -5f;  // Increase gravity for more realistic falling
-    public float strength = 3f;   // Flap strength (adjust based on gravity)
-    public float tilt = 5f;       // Tilt factor for rotation
-    private Vector3 direction;    // Direction for movement
+    public float gravity = -5f;  
+    public float strength = 3f;   
+    public float tilt = 5f;       
+    private Vector3 direction;    
     Agent m_Agent;
     RayPerceptionSensor rayPerceptionSensor;
 
@@ -155,7 +155,7 @@ public class MLA : Agent
         Debug.Log("Reward: " + GetCumulativeReward());
     }
 
-
+    //not used anymore was used as an alternative to Decision Requester
     public void WaitTimeInference()
     {
         Debug.Log("WaitTimeInference");
